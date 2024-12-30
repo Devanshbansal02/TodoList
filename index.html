@@ -35,7 +35,7 @@
         async function signup() {
             const uname = document.querySelector("#inputSupuser").value;
             const pswd = document.querySelector("#inputSuppswd").value;
-            const response = await axios.post("http://localhost:3000/signup", {
+            const response = await axios.post("https://todolist-o6ee.onrender.com/signup", {
                 username: uname,
                 password: pswd
             })
@@ -44,12 +44,12 @@
         async function signin() {
             const uname = document.querySelector("#inputSinuser").value;
             const pswd = document.querySelector("#inputSinpswd").value;
-            const response = await axios.post("http://localhost:3000/signin", {
+            const response = await axios.post("https://todolist-o6ee.onrender.com/signin", {
                 username: uname,
                 password: pswd
             })
             localStorage.setItem("token", response.data.token);
-            window.location.href = "../index.html";
+            window.location.href = "Signin-signup/index.html";
             alert("Signed in successfully");
         }
     </script>
