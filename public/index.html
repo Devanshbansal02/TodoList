@@ -19,7 +19,7 @@
             try {
                 if (token) {
                     const response = await axios.post(
-                        "http://localhost:3000/todos",
+                        "https://todolist-o6ee.onrender.com/todos",
                         { todo: { content: todoContent } },
                         { headers: { authorization: token } }
                     );
@@ -46,7 +46,7 @@
             }
 
             try {
-                const response = await axios.get("http://localhost:3000/todos", {
+                const response = await axios.get("https://todolist-o6ee.onrender.com/todos", {
                     headers: { authorization: token },
                 });
 
@@ -82,7 +82,7 @@
             }
 
             try {
-                const response = await axios.delete(`http://localhost:3000/todos/${index}`, {
+                const response = await axios.delete(`https://todolist-o6ee.onrender.com/todos/${index}`, {
                     headers: { authorization: token },
                 });
                 alert(response.data.alert);
