@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+    <script>
+        async function addTodo() {
+            const token = localStorage.getItem("token");
+            const todoContent = document.querySelector("#input").value;
+
+            if (!todoContent.trim()) {
+                alert("Task content cannot be empty.");
+                return;
+            }
+
+            try {
+                if (token) {
+                    const response = await axios.post(
+                        "http://localhost:3000/todos",
+                        { todo: { content: todoContent } },
+                        { headers: { authorization: token } }
+                    );
+                    alert(response.data.alert);
+                    getTodos(); // Refresh the list after adding a task
+                } else {
+                    alert("You are not logged in. Redirecting to login.");
+                    window.location.href = "/Signin-signup/index.html"; // Adjust path if needed
+                }
+            } catch (error) {
+                console.error("Error adding todo:", error);
+                alert("Failed to add the task. Please try again.");
+            }
+        }
+
+
+        async function getTodos() {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                alert("You are not logged in. Redirecting to login.");
+                window.location.href = "/Signin-signup/index.html"; // Adjust path if needed
+                return;
+            }
+
+            try {
+                const response = await axios.get("http://localhost:3000/todos", {
+                    headers: { authorization: token },
+                });
+
+                const todoList = response.data; // Backend response containing all todos
+                const parentEl = document.querySelector(".todoList");
+                parentEl.innerHTML = ""; // Clear existing todo list in the DOM
+
+                todoList.forEach((todo, index) => {
+                    const divEl = document.createElement("div");
+                    divEl.setAttribute("class", "todo");
+                    divEl.setAttribute("id", index); // Use the index as the ID
+
+                    divEl.innerHTML = `
+                        <span>${todo.content}</span>
+                        <button onclick="deleteTodo(${index})" class="delete">Delete</button>
+                    `;
+
+                    parentEl.appendChild(divEl);
+                });
+            } catch (error) {
+                console.error("Error fetching todos:", error);
+                alert("Failed to load tasks. Please try again.");
+            }
+        }
+
+        async function deleteTodo(index) {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                alert("You are not logged in. Redirecting to login.");
+                window.location.href = "/Signin-signup/index.html"; // Adjust path if needed
+                return;
+            }
+
+            try {
+                const response = await axios.delete(`http://localhost:3000/todos/${index}`, {
+                    headers: { authorization: token },
+                });
+                alert(response.data.alert);
+                getTodos(); // Refresh the list after deletion
+            } catch (error) {
+                console.error("Error deleting todo:", error);
+                alert("Failed to delete the task. Please try again.");
+            }
+        }
+
+        getTodos()
+    </script>
+</head>
+<body>
+    <div class = "List">
+        <h1>Todo App</h1>
+        <div class="input">
+            <input type="text" placeholder="Add task" id="input">
+            <button id="add" onclick="addTodo()">Add</button>
+        </div>
+        <div class = "todoList">
+
+        </div>
+    </div>
+    <!-- <script src="index.js"></script> -->
+</body>
+</html>

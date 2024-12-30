@@ -1,0 +1,89 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Optional: Use this to prevent scroll bars */
+}
+
+body {
+    background: rgb(0,223,240);
+    background-image: linear-gradient(180deg, rgba(0,223,240,1) 35%, rgba(0,77,255,1) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%; /*the entire viewport width and height */
+    align-content: center;
+    justify-content: center;
+}
+
+h1{
+    align-self: center;
+    justify-self: center;
+    padding: 0;
+    margin: 0;
+}
+
+.Main{
+    background-color: rgb(255, 255, 255);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+button{
+    width: 30%;
+    align-self: center;
+    padding: 6px;
+    margin: 5px;
+    color: aliceblue;
+    background-color: rgb(189, 34, 255);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border: 1px solid black;
+}
+.input{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    justify-content: center;
+    align-self: center;
+    padding: 3px;
+    padding-bottom: 10px;
+}
+
+input{
+    margin: 5px;
+    color: black;
+    background-color: rgb(247, 233, 217);
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.non{
+    border: none;
+    background-color: white;
+    color: rgb(189, 34, 255);
+    padding: 0;
+    margin: 0;
+}
+#signinhead, #inputSinuser, #inputSinpswd, #signinbutton, #needsignup{
+    display: none;
+}
+#needsignin{
+    display: flex;
+    justify-content: center;
+}
